@@ -72,14 +72,48 @@ class Player
     }
     if (checkKey(button2))
     {
-      println("Player " + index + " butt2");
+      println("Player " + index + " button 2");
     }    
   }
   
   void display()
   {    
     stroke(colour);
-    fill(colour);    
-    rect(pos.x, pos.y, 20, 20);
+    fill(colour); 
+    line(pos.x+2, pos.y-11, pos.x, pos.y-14);
+    line(pos.x-2, pos.y-11, pos.x, pos.y-14);
+    line(pos.x, pos.y-9, pos.x+2, pos.y-11);
+    line(pos.x, pos.y-9, pos.x-2, pos.y-11);
+    line(pos.x, pos.y-18, pos.x+2, pos.y-16);
+    line(pos.x+2, pos.y-16, pos.x+4, pos.y-17);
+    line(pos.x+4, pos.y-17, pos.x+6, pos.y-11);
+    line(pos.x+3, pos.y-15, pos.x+6, pos.y-11);
+    line(pos.x+6, pos.y-11, pos.x+5, pos.y-9);
+    line(pos.x+5, pos.y-9, pos.x+7, pos.y-7);
+    line(pos.x+7, pos.y-7, pos.x+5, pos.y-4);
+    line(pos.x+5, pos.y-4, pos.x+5, pos.y);   
+    line(pos.x, pos.y-18, pos.x-2, pos.y-16);
+    line(pos.x-2, pos.y-16, pos.x-4, pos.y-17);
+    line(pos.x-4, pos.y-17, pos.x-6, pos.y-11);
+    line(pos.x-3, pos.y-15, pos.x-6, pos.y-11);
+    line(pos.x-6, pos.y-11, pos.x-5, pos.y-9);
+    line(pos.x-5, pos.y-9, pos.x-7, pos.y-7);
+    line(pos.x-7, pos.y-7, pos.x-5, pos.y-4);
+    line(pos.x-5, pos.y-4, pos.x-5, pos.y);
+    line(pos.x-5, pos.y, pos.x-10, pos.y-2 );
+    line(pos.x-10, pos.y-2, pos.x-12,pos.y-7);
+    line(pos.x-12, pos.y-7, pos.x-14, pos.y-1);
+    line(pos.x-14, pos.y-1, pos.x-13, pos.y+4);
+    line(pos.x-14, pos.y+4, pos.x-13,pos.y+7);
+    line(pos.x-13, pos.y+7, pos.x-4, pos.y+6);
+    line(pos.x-4, pos.y+6, pos.x, pos.y+7);
+    line(pos.x+5, pos.y, pos.x+10, pos.y-2 );
+    line(pos.x+10, pos.y-2, pos.x+12,pos.y-7);
+    line(pos.x+12, pos.y-7, pos.x+14, pos.y-1);
+    line(pos.x+14, pos.y-1, pos.x+13, pos.y+4);
+    line(pos.x+14, pos.y+4, pos.x+13,pos.y+7);
+    line(pos.x+13, pos.y+7, pos.x+4, pos.y+6);
+    line(pos.x+4, pos.y+6, pos.x, pos.y+7);
+    
   }  
 }
