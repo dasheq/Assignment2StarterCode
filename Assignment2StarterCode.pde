@@ -7,7 +7,6 @@
 */
 PImage startbg;
 int gamemode = 0;
-ArrayList<Player> players = new ArrayList<Player>();
 boolean[] keys = new boolean[526];
 boolean option1;
 boolean option2;
@@ -16,20 +15,20 @@ int textColor1;
 int textColor2;
 int textColor3;
 int noPlayers;
-Ufo ufo1;
  
 void setup()
 {
-  size(500, 500);
+  size(800, 600);
   
   gamemode = 0;
-  ufo1 = new Ufo(400,400);
-    textColor1 = (int)random(0,255);
-    textColor2 = (int)random(0,255);
-    textColor3 = (int)random(0,255);
+  textColor1 = (int)random(0,255);
+  textColor2 = (int)random(0,255);
+  textColor3 = (int)random(0,255);
     
 }
 
+
+ArrayList<GameObjects> objects = new ArrayList<GameObjects>();
 
 void draw()
 {
@@ -37,25 +36,25 @@ void draw()
   {
 
     startbg = loadImage("startbg.jpg");
-    startbg.resize(500,500);
+    startbg.resize(800,600);
     background(startbg);
     textSize(80);
     fill(textColor1,textColor2,textColor3);
-    text("K9LL", 250,100);
+    text("K9LL", width/2,100);
     textSize(30);
-    if( (mouseX >130 && mouseY > 270 )&& (mouseX < 390 && mouseY < 300))
+    if( (mouseX >280 && mouseY > 370 )&& (mouseX < 520 && mouseY < 400))
       {
         
        showText1();
         
       }
-      else if( (mouseX >130 && mouseY > 302 )&& (mouseX< 390 && mouseY < 333 ))
+      else if( (mouseX >280 && mouseY > 402 )&& (mouseX< 520 && mouseY < 433 ))
       {
        
         showText2();
         
       }
-      else if((mouseX > 130 && mouseY > 335) && (mouseX< 390 && mouseY < 365))
+      else if((mouseX > 310 && mouseY > 435) && (mouseX< 490 && mouseY < 465))
       {
 
         showText3();
@@ -73,33 +72,68 @@ void draw()
    if(noPlayers == 1)
    //for(Player player:players)
    { 
-     setUpPlayerControllers();
-      players.get(0).update();
-      players.get(0).display();
-      ufo1.display();
+       setUpPlayerControllers();
+       objects.add(new Speed(400,400));
+       objects.add(new Wallhack(200,200));
+       objects.get(objects.size()-2).display();
+       objects.get(objects.size()-1).display();
+       for (int i = 0 ; i < noPlayers ; i ++)
+       {
+          objects.get(i).move();
+          objects.get(i).display();
+          if (! objects.get(i).alive)
+          {
+            objects.remove(i);
+          }
+       }
+   
+       
+       for(int i = 0 ; i < noPlayers ; i++)
+       {
+            objects.get(noPlayers+i).display();
+       }
    } 
+       
+   
    if(noPlayers == 2)
    {
-     setUpPlayerControllers();
-     players.get(0).update();
-     players.get(0).display();
-     players.get(1).update();
-     players.get(1).display();
-   }
+       setUpPlayerControllers();
+       objects.add(new Speed(400,400));
+       objects.add(new Wallhack(200,200));
+       objects.get(objects.size()-2).display();
+       objects.get(objects.size()-1).display();
+       
+       for (int i = 0 ; i < noPlayers ; i ++)
+       {
+         objects.get(i).display();
+          objects.get(i).move();
+        
+     
+         if (! objects.get(i).alive)
+         {
+           objects.remove(i);
+         }
+       }
+       
+       for(int i = 0 ; i < noPlayers ; i++)
+       {
+         objects.get(noPlayers+i).display();
+       }
+   }   
   }
-}
+ }
 
 void showText1()
 {
         textAlign(CENTER);
         fill(255);
         stroke(0);
-        text("START GAME 1P",250,300);
+        text("START GAME 1P",width/2,400);
         textAlign(CENTER);
         fill(textColor1,textColor2,textColor3);
-        text("START GAME 2P",250, 333);
+        text("START GAME 2P",width/2, 433);
         textAlign(CENTER);
-        text("EXIT GAME", 250, 365);
+        text("EXIT GAME", width/2, 465);
         option1 = true;
         option2 = false;
         option3 = false;
@@ -109,13 +143,13 @@ void showText2()
 {       
         textAlign(CENTER);
         fill(textColor1,textColor2,textColor3);
-        text("START GAME 1P",250,300);
+        text("START GAME 1P",width/2,400);
         textAlign(CENTER);
         fill(255);
-        text("START GAME 2P",250, 333);
+        text("START GAME 2P",width/2, 433);
         textAlign(CENTER);
         fill(textColor1,textColor2,textColor3);
-        text("EXIT GAME", 250, 365);
+        text("EXIT GAME", width/2, 465);
         option1 = false;
         option2 = true;
         option3 = false;
@@ -128,12 +162,12 @@ void showText3()
         textAlign(CENTER);
         fill(textColor1,textColor2,textColor3);
         stroke(0);
-        text("START GAME 1P",250,300);
+        text("START GAME 1P",width/2,400);
         textAlign(CENTER);
-        text("START GAME 2P",250, 333);
+        text("START GAME 2P",width/2, 433);
         textAlign(CENTER);
         fill(255);
-        text("EXIT GAME", 250, 365);
+        text("EXIT GAME", width/2, 465);
         option1 = false;
         option2 = false;
         option3 = true;
@@ -145,11 +179,11 @@ void showText4()
         textAlign(CENTER);
         fill(textColor1,textColor2,textColor3);
         stroke(0);
-        text("START GAME 1P",250,300);
+        text("START GAME 1P",width/2,400);
         textAlign(CENTER);
-        text("START GAME 2P",250, 333);
+        text("START GAME 2P",width/2, 433);
         textAlign(CENTER);
-        text("EXIT GAME", 250, 365);
+        text("EXIT GAME", width/2, 465);
         option1 = false;
         option2 = false;
         option3 = false;
@@ -228,7 +262,8 @@ void setUpPlayerControllers()
     int x = (i + 1) * gap;
     p.pos.x = x;
     p.pos.y = 300;
-   players.add(p);         
+   objects.add(p);         
+   objects.add(new Ufo());
   }
 }
 

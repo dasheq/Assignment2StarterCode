@@ -1,18 +1,20 @@
-class Ufo
+class Ufo extends GameObjects
 {
-  PVector position;
   PVector cPos;
+  int health;
+  
   Ufo()
   {
-    position = new PVector(width/2,width/2);
-    cPos = new PVector(0,0);
+     cPos = new PVector(width/2,width/2);
   }
   
   
   Ufo(float x, float y)
   {
-    position.x = x;
-    position.y = y;
+    pos.x = x;
+    pos.y = y;
+   // position.x = x;  
+   // position.y = y;
   }
   
   
@@ -23,17 +25,19 @@ class Ufo
   float thetaInc = TWO_PI/segments;
   float theta = 0;
   float radius = 10;
-  
-    ellipse(position.x,position.y, 50,30);
-    ellipse(position.x,position.y, 40,25);
-    ellipse(position.x,position.y, 3,3);
+    fill(0);
+    stroke(textColor1,textColor2,textColor3);
+    ellipse(pos.x,pos.y, 50,30);
+    ellipse(pos.x,pos.y, 40,25);
+    ellipse(pos.x,pos.y, 3,3);
     
     while (theta < TWO_PI)
     {
-      cPos.x = position.x + sin(theta) * radius;
-      cPos.y = position.y + cos(theta) * radius;
+      cPos.x = pos.x + sin(theta) * radius;
+      cPos.y = pos.y + cos(theta) * radius;
       ellipse(cPos.x, cPos.y, 5, 5);
       theta += thetaInc;
     }
   }
+ 
 }

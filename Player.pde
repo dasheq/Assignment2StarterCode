@@ -1,6 +1,5 @@
-class Player
+class Player extends GameObjects
 {
-  PVector pos;
   char up;
   char down;
   char left;
@@ -10,10 +9,11 @@ class Player
   char button2;
   int index;
   color colour;
+  int score = 0;
     
   Player()
   {
-    pos = new PVector(width / 2, height / 2);
+    theta2 = 0;
   }
   
   Player(int index, color colour, char up, char down, char left, char right, char start, char button1, char button2)
@@ -44,23 +44,26 @@ class Player
         );
   }
   
-  void update()
+  void move()
   {
+    
+    vertical.x = sin(theta2);
+    vertical.y = -cos(theta2);
     if (checkKey(up))
     {
-      pos.y -= 2;
+      pos.add(vertical);
     }
     if (checkKey(down))
     {
-      pos.y += 2;
+      pos.sub(vertical);
     }
     if (checkKey(left))
     {
-      pos.x -= 2;
+      theta2 -= 0.1f;
     }    
     if (checkKey(right))
     {
-      pos.x += 2;
+      theta2 += 0.1f;
     }
     if (checkKey(start))
     {
@@ -78,42 +81,46 @@ class Player
   
   void display()
   {    
+    pushMatrix();
+    translate(pos.x, pos.y);
+    rotate(theta2);
+    
     stroke(colour);
     fill(colour); 
-    line(pos.x+2, pos.y-11, pos.x, pos.y-14);
-    line(pos.x-2, pos.y-11, pos.x, pos.y-14);
-    line(pos.x, pos.y-9, pos.x+2, pos.y-11);
-    line(pos.x, pos.y-9, pos.x-2, pos.y-11);
-    line(pos.x, pos.y-18, pos.x+2, pos.y-16);
-    line(pos.x+2, pos.y-16, pos.x+4, pos.y-17);
-    line(pos.x+4, pos.y-17, pos.x+6, pos.y-11);
-    line(pos.x+3, pos.y-15, pos.x+6, pos.y-11);
-    line(pos.x+6, pos.y-11, pos.x+5, pos.y-9);
-    line(pos.x+5, pos.y-9, pos.x+7, pos.y-7);
-    line(pos.x+7, pos.y-7, pos.x+5, pos.y-4);
-    line(pos.x+5, pos.y-4, pos.x+5, pos.y);   
-    line(pos.x, pos.y-18, pos.x-2, pos.y-16);
-    line(pos.x-2, pos.y-16, pos.x-4, pos.y-17);
-    line(pos.x-4, pos.y-17, pos.x-6, pos.y-11);
-    line(pos.x-3, pos.y-15, pos.x-6, pos.y-11);
-    line(pos.x-6, pos.y-11, pos.x-5, pos.y-9);
-    line(pos.x-5, pos.y-9, pos.x-7, pos.y-7);
-    line(pos.x-7, pos.y-7, pos.x-5, pos.y-4);
-    line(pos.x-5, pos.y-4, pos.x-5, pos.y);
-    line(pos.x-5, pos.y, pos.x-10, pos.y-2 );
-    line(pos.x-10, pos.y-2, pos.x-12,pos.y-7);
-    line(pos.x-12, pos.y-7, pos.x-14, pos.y-1);
-    line(pos.x-14, pos.y-1, pos.x-13, pos.y+4);
-    line(pos.x-14, pos.y+4, pos.x-13,pos.y+7);
-    line(pos.x-13, pos.y+7, pos.x-4, pos.y+6);
-    line(pos.x-4, pos.y+6, pos.x, pos.y+7);
-    line(pos.x+5, pos.y, pos.x+10, pos.y-2 );
-    line(pos.x+10, pos.y-2, pos.x+12,pos.y-7);
-    line(pos.x+12, pos.y-7, pos.x+14, pos.y-1);
-    line(pos.x+14, pos.y-1, pos.x+13, pos.y+4);
-    line(pos.x+14, pos.y+4, pos.x+13,pos.y+7);
-    line(pos.x+13, pos.y+7, pos.x+4, pos.y+6);
-    line(pos.x+4, pos.y+6, pos.x, pos.y+7);
-    
+    line(2, -11, 0, -14);
+    line(-2, -11, 0, -14);
+    line(0, -9, 2, -11);
+    line(0, -9, -2, -11);
+    line(0, -18, 2, -16);
+    line(2, -16, 4, -17);
+    line(4, -17, 6, -11);
+    line(3, -15, 6, -11);
+    line(6, -11, 5, -9);
+    line(5, -9, 7, -7);
+    line(7, -7, 5, -4);
+    line(5, -4, 5, 0);   
+    line(0, -18, -2, -16);
+    line(-2, -16, -4, -17);
+    line(-4, -17, -6, -11);
+    line(-3, -15, -6, -11);
+    line(-6, -11, -5, -9);
+    line(-5, -9, -7, -7);
+    line(-7, -7, -5, -4);
+    line(-5, -4, -5, 0);
+    line(-5, 0, -10, -2 );
+    line(-10, -2, -12,-7);
+    line(-12, -7, -14, -1);
+    line(-14, -1, -13, 4);
+    line(-14, 4, -13,7);
+    line(-13, 7, -4, 6);
+    line(-4, 6, 0, 7);
+    line(5, 0, 10, -2 );
+    line(10, -2, 12,-7);
+    line(12, -7, 14, -1);
+    line(14, -1, 13, 4);
+    line(14, 4, 13,7);
+    line(13, 7, 4, 6);
+    line(4, 6, 0, 7);
+    popMatrix();
   }  
 }
