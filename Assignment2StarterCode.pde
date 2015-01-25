@@ -16,17 +16,20 @@ int textColor1;
 int textColor2;
 int textColor3;
 int noPlayers;
-
+Ufo ufo1;
+ 
 void setup()
 {
   size(500, 500);
   
   gamemode = 0;
-  
+  ufo1 = new Ufo(400,400);
     textColor1 = (int)random(0,255);
     textColor2 = (int)random(0,255);
     textColor3 = (int)random(0,255);
+    
 }
+
 
 void draw()
 {
@@ -73,6 +76,7 @@ void draw()
      setUpPlayerControllers();
       players.get(0).update();
       players.get(0).display();
+      ufo1.display();
    } 
    if(noPlayers == 2)
    {
