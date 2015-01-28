@@ -5,6 +5,7 @@ class GameObjects
   PVector horizontal;
   boolean alive;
   float theta2;
+  int powerUPid;
   
   GameObjects()
   {
